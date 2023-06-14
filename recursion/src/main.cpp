@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 int factorial(int n) {
     if (n == 1) {
@@ -33,6 +34,26 @@ int count_items(std::vector<int>::const_iterator beg, std::vector<int>::const_it
     // get current count (one at a time)
     // and add current value to *result of the resursive function*
     return count_items(++beg, end) + COUNT;   
+}
+
+int b_search(std::vector<int>::const_iterator low, std::vector<int>::const_iterator high, int target) {
+    // Implementing binary search as a recursive, divide and conquer algoithm.
+
+    // Exit cases
+    if (low == high) {
+        return -1;
+    }
+
+    const auto mid_index = ((high - low) / 2);
+    auto mid = low + mid_index;
+
+    if (*mid < target) {
+        return b_search(mid+1, high, target);
+    } else if ( *mid > target) {
+        return b_search(low, mid-1, target);
+    } 
+
+    return *mid;
 }
 
 int main() {
@@ -82,6 +103,11 @@ int main() {
     std::cout << "Sum loop: " << sums << std::endl;
 
     std::cout << "Sum recursion: " << sum(vec.begin(), vec.end()) << std::endl;
+
+    // Binary search
+    //std::sort(vec.begin(), vec.end());
+    auto found = b_search(iv.begin(), iv.end(), 3);
+    std::cout << found << " found!\n";
 
     return 0;
 }
