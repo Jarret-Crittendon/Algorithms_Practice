@@ -37,7 +37,7 @@ int count_items(std::vector<int>::const_iterator beg, std::vector<int>::const_it
 }
 
 int b_search(std::vector<int>::const_iterator low, std::vector<int>::const_iterator high, int target) {
-    // Implementing binary search as a recursive, divide and conquer algoithm.
+    // Implementing binary search as a recursive, divide and conquer algorithm.
 
     // Exit cases
     if (low == high) {
