@@ -7,7 +7,7 @@ template <typename T>
 void quicksort(std::vector<T> &vec);
 
 int main() {
-    std::vector<int> ivec {5, 9, 7, 1, 0, 8, 2, 4, 3, 6, 6};
+    std::vector<int> ivec {5, 9, 8, 7, 1, 0, 8, 2, 4, 3, 8, 6, 6};
     std::vector<std::string> svec {
         "MINASE Iori",
         "TAKATSUKI Yayoi",
@@ -22,13 +22,11 @@ int main() {
     };
 
     quicksort(ivec);
-    for (const auto& i : ivec) {
-        std::cout << i << " ";
-    }
+    for_each(ivec.begin(), ivec.end(), [](const auto& i) { std::cout << i << ' '; });
     std::cout << std::endl;
 
     quicksort(svec);
-    std::for_each(svec.begin(), svec.end(), [](const auto& s) { std::cout << s << '\n';});
+    std::for_each(svec.begin(), svec.end(), [](const auto& s) { std::cout << s << '\n'; });
     std::cout << std::endl;
 
     return 0;
