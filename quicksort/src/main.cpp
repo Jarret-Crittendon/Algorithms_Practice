@@ -2,14 +2,12 @@
 #include <cstdlib>
 #include <vector>
 #include <algorithm>
-#include <iterator>
-#include <string>
 
 template <typename T>
 void quicksort(std::vector<T> &vec);
 
 int main() {
-    std::vector<int> ivec {5, 9, 7, 1, 0, 8, 2, 4, 3, 6};
+    std::vector<int> ivec {5, 9, 7, 1, 0, 8, 2, 4, 3, 6, 6};
     std::vector<std::string> svec {
         "MINASE Iori",
         "TAKATSUKI Yayoi",
@@ -30,10 +28,7 @@ int main() {
     std::cout << std::endl;
 
     quicksort(svec);
-    /*for (const auto& s : svec) {
-        std::cout << s << "\n";
-    }*/
-    std::for_each(svec.begin(), svec.end(), std::ostream_iterator<std::string>(std::cout, "\n"));
+    std::for_each(svec.begin(), svec.end(), [](const auto& s) { std::cout << s << '\n';});
     std::cout << std::endl;
 
     return 0;
@@ -61,6 +56,9 @@ void quicksort(std::vector<T> &vec) {
     std::vector<T> less;
     std::vector<T> greater;
 
+    // Track for values equal to the pivot
+    unsigned pivot_count = 0;
+
     for (const auto& i : vec) {
         // sub-array for items smaller than pivot value
         if (i < pivot) {
@@ -68,7 +66,9 @@ void quicksort(std::vector<T> &vec) {
             less.push_back(i);
         } else if (i > pivot) {
             greater.push_back(i);
-        } 
+        } else {
+            pivot_count++;
+        }
     }
 
     quicksort(less);
@@ -78,6 +78,8 @@ void quicksort(std::vector<T> &vec) {
     vec.clear();
 
     vec.insert(vec.end(), less.begin(), less.end());
-    vec.push_back(pivot);
+    for (unsigned cnt = 0; cnt < pivot_count; ++cnt) {
+        vec.push_back(pivot);
+    }
     vec.insert(vec.end(), greater.begin(), greater.end());
 }
