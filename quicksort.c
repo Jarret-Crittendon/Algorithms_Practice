@@ -32,6 +32,7 @@ void quicksort(int arr[], const size_t size) {
     }
     size_t less_index = 0;
     size_t greater_index = 0;
+    size_t pivot_count = 0;
 
     // Allocate based on whether values in the array are greater than or less than
     // the pivot
@@ -40,6 +41,8 @@ void quicksort(int arr[], const size_t size) {
             less[less_index++] = arr[i];
         } else if (arr[i] > pivot) {
             greater[greater_index++] = arr[i];
+        } else {
+            pivot_count++;
         }
     }
 
@@ -50,7 +53,9 @@ void quicksort(int arr[], const size_t size) {
     for (; n < less_index; n++) {
         arr[n] = less[n];
     }
-    arr[n++] = pivot;
+    for (int j = 0; j < pivot_count; ++j) {
+        arr[n++] = pivot;
+    }
     for (int i = 0; n < size; n++) {
         arr[n] = greater[i++];
     }
