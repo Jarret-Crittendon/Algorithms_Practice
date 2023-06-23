@@ -61,7 +61,7 @@ int main() {
         auto cost = costs[node];
         auto neighbors = graph[node];
         for (const auto& neighbor : neighbors) {
-            int new_cost = cost + neighbor.second;
+            auto new_cost = cost + neighbor.second;
             if (new_cost < costs[neighbor.first]) {
                 costs[neighbor.first] = new_cost;
                 parents[neighbor.first] = node;
